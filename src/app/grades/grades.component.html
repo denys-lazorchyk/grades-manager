@@ -1,1 +1,6 @@
-<p>grades works!</p>
+<div class="grades__holder">
+    <app-grade *ngFor="let grade of grades" [grade]="grade" (click)="editThisGrade(grade.id)"></app-grade>
+</div>
+<div>
+    <app-edit-grade [grade]="editableGrade"></app-edit-grade>
+</div>

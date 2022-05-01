@@ -1,1 +1,5 @@
-<p>grade works!</p>
+<div class="grade" (click)="updateEditable()">
+    <div class="text-name">{{grade.name}}</div>
+    <p><span class="from">{{grade.from}}</span>-<span class="to">{{grade.to}}</span></p>
+    <button (click)="deleteGrade()">delete</button>
+ </div>

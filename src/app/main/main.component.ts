@@ -12,4 +12,8 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  showMe(id: any){
+    console.log("i am here")
+  }
+
 }

@@ -1,0 +1,11 @@
+.grade {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border:  1px solid grey;
+    background-color: lightgrey;
+    cursor: pointer
+}

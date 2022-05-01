@@ -9,6 +9,8 @@ import { ControllerComponent } from './controller/controller.component';
 import { GradesComponent } from './grades/grades.component';
 import { GradeComponent } from './grades/grade/grade.component';
 import { EditGradeComponent } from './grades/edit-grade/edit-grade.component';
+import { GradesCollection } from './main/grades.services';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,8 @@ import { EditGradeComponent } from './grades/edit-grade/edit-grade.component';
     GradeComponent,
     EditGradeComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [GradesCollection],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
