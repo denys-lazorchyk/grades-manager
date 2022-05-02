@@ -144,7 +144,6 @@ export class GradesCollection {
           : 100,
       };
     }
-
     return temp;
   }
 }

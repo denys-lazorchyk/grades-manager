@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GradesCollection } from '../main/grades.services';
+import { GradesCollection } from './grades.services';
 
 @Component({
   selector: 'app-grades',
@@ -20,7 +20,7 @@ export class GradesComponent implements OnInit {
   constructor(private gradesService: GradesCollection) {}
 
   ngOnInit(): void {
-    this.grades = this.gradesService.grades;
+    this.grades = this.gradesService.getGrades();
     this.editableGrade = this.gradesService.getGrade(1);
   }
 

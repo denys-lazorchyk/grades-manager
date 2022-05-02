@@ -1,2 +1,29 @@
-<a href="">Show grades</a>
-<a href="">Show main</a>
+<ul>
+    <li>
+        <a routerLinkActive="active" routerLink="/" [routerLinkActiveOptions]="{exact: true}">
+            <div class="icon-holder">
+                <img src="../assets/images/home-orange.svg" alt="" class="icon icon-active">
+                <img src="../assets/images/home.svg" alt="" class="icon icon-passive">
+            </div>
+            <p>Home</p>
+        </a>
+    </li>
+    <li>
+        <a routerLinkActive="active" routerLink="/grades">
+            <div class="icon-holder">
+                <img src="../assets/images/grade-orange.svg" alt="" class="icon icon-active">
+                <img src="../assets/images/grade.svg" alt="" class="icon icon-passive">
+            </div>
+            <p>Grades</p>
+        </a>
+    </li>
+    <li>
+        <a routerLinkActive="active" routerLink="/settings">
+            <div class="icon-holder">
+                <img src="../assets/images/settings-orange.svg" alt="" class="icon icon-active">
+                <img src="../assets/images/settings.svg" alt="" class="icon icon-passive">
+            </div>
+            <p>Settings</p>
+        </a>
+    </li>
+</ul>

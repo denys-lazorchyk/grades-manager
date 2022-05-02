@@ -1,11 +1,37 @@
 .grade {
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border:  1px solid grey;
-    background-color: lightgrey;
-    cursor: pointer
+  padding: 20px 27px;
+  border-radius: 17px;
+  margin: 15px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-grey);
+  cursor: pointer;
+  font-family: "Fira Sans", sans-serif;
+  transition: all 0.3s;
+  box-shadow: 0px 0px 15px 2px var(--color-lightgrey);
+}
+
+.grade p {
+  font-size: 18px;
+}
+
+.grade:hover {
+  box-shadow: 0px 0px 15px 2px var(--color-orange);
+}
+
+.grade-name {
+  width: 40%;
+  overflow: hidden;
+}
+
+.grade-stats {
+  width: 40%;
+  overflow: hidden;
+}
+
+@media (max-width: 640px) {
+  .grade {
+    padding: 14px 20px;
+  }
 }

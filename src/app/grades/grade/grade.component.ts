@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { GradesCollection } from 'src/app/main/grades.services';
+import { GradesCollection } from 'src/app/grades/grades.services';
 
 @Component({
   selector: 'app-grade',

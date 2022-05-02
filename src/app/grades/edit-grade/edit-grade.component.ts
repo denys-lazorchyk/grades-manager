@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { GradesCollection } from 'src/app/main/grades.services';
+import { GradesCollection } from 'src/app/grades/grades.services';
 
 @Component({
   selector: 'app-edit-grade',
@@ -11,7 +11,7 @@ export class EditGradeComponent implements OnInit {
   @Input() grade: any;
   @Input() addOrRemove: boolean = false;
 
-  grades = this.gradesCollection.grades;
+  grades = this.gradesCollection.getGrades();
 
   editableMaxRange: { from: number; to: number };
   addableMaxRange: { from: number; to: number } = { from: 0, to: 100 };
@@ -43,12 +43,14 @@ export class EditGradeComponent implements OnInit {
   }
 
   updateGrade() {
-    this.gradesCollection.updateGrade(this.grade.id, {
-      name: this.grade.name,
-      from: this.grade.from,
-      to: this.grade.to,
-      description: this.grade.description,
-    });
+    if (this.grade.from <= this.grade.to) {
+      this.gradesCollection.updateGrade(this.grade.id, {
+        name: this.grade.name,
+        from: this.grade.from,
+        to: this.grade.to,
+        description: this.grade.description,
+      });
+    }
   }
 
   changeState() {
@@ -62,7 +64,6 @@ export class EditGradeComponent implements OnInit {
 
   addGrade() {
     if (this.checkForOverlapingRanges(this.grade.from, this.grade.to)) {
-      console.log('I will add this one');
       this.gradesCollection.addGrade({
         name: this.grade.name,
         to: this.grade.to,

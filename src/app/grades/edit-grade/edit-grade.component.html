@@ -1,10 +1,16 @@
-<input type="text" [(ngModel)]="grade.name">
-<input type="number" min="{{grade.maxRange.from}}" max="{{grade.maxRange.to}}" [(ngModel)]="grade.from">
-<input type="number" min="{{grade.maxRange.from}}" max="{{grade.maxRange.to}}" [(ngModel)]="grade.to">
-<input type="text" [(ngModel)]="grade.description">
-<button class="removeGrade" (click)="updateGrade()" *ngIf="!addOrRemove">Submit Changes</button>
-<button class="addGrade" (click)="addGrade()" *ngIf="addOrRemove">Add Grade</button>
-<label class="switch">
-    <input type="checkbox" (change)="changeState()">
-    <span class="slider round"></span>
-</label>
+<h2>Edit/Add grade:</h2>
+<div class="edit-input">
+    <input type="text" [(ngModel)]="grade.name">
+    <input type="number" min="{{grade.maxRange.from}}" max="{{grade.maxRange.to}}" [(ngModel)]="grade.from">
+    <input type="number" min="{{grade.maxRange.from}}" max="{{grade.maxRange.to}}" [(ngModel)]="grade.to">
+    <input type="text" [(ngModel)]="grade.description">
+    <button class="removeGrade btn" (click)="updateGrade()" *ngIf="!addOrRemove">Submit Changes</button>
+    <button class="addGrade btn" (click)="addGrade()" *ngIf="addOrRemove">Add Grade</button>
+    <div class="switch-holder">
+        <label class="switch">
+            <input type="checkbox" (change)="changeState()">
+            <span class="slider round"></span>
+        </label>
+        <p>add/update grade</p>
+    </div>
+</div>
