@@ -1,5 +1,10 @@
-<input type="text" [(ngModel)]="name">
-<input type="number" [(ngModel)]="from">
-<input type="nunber" [(ngModel)]="to">
-<input type="text" [(ngModel)]="description">
-<button (click)="updateGrade()">Submit</button>
+<input type="text" [(ngModel)]="grade.name">
+<input type="number" min="0" max="100" [(ngModel)]="grade.from">
+<input type="number" min="0" max="100" [(ngModel)]="grade.to">
+<input type="text" [(ngModel)]="grade.description">
+<button class="removeGrade" (click)="updateGrade()" *ngIf="!addOrRemove">Submit Changes</button>
+<button class="addGrade" (click)="addGrade()" *ngIf="addOrRemove">Add Grade</button>
+<label class="switch">
+    <input type="checkbox" (change)="changeState()">
+    <span class="slider round"></span>
+</label>

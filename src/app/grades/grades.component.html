@@ -1,6 +1,10 @@
 <div class="grades__holder">
-    <app-grade *ngFor="let grade of grades" [grade]="grade" (click)="editThisGrade(grade.id)"></app-grade>
+    <app-grade *ngFor="let grade of grades" [grade]="grade" (click)="getNewEditableGrade(grade.id)"
+        (onDeleted)="getNewEditableGrade($event)">
+    </app-grade>
 </div>
 <div>
-    <app-edit-grade [grade]="editableGrade"></app-edit-grade>
+    <div>
+        <app-edit-grade [grade]="editableGrade"></app-edit-grade>
+    </div>
 </div>

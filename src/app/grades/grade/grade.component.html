@@ -1,5 +1,5 @@
-<div class="grade" (click)="updateEditable()">
+<div class="grade">
     <div class="text-name">{{grade.name}}</div>
     <p><span class="from">{{grade.from}}</span>-<span class="to">{{grade.to}}</span></p>
-    <button (click)="deleteGrade()">delete</button>
- </div>
+    <button (click)="deleteGrade($event)">delete</button>
+</div>
