@@ -10,24 +10,40 @@ export class EditGradeComponent implements OnInit {
   constructor(private gradesCollection: GradesCollection) {}
   @Input() grade: any;
   @Input() addOrRemove: boolean = false;
-  gradeId: number;
+
+  grades = this.gradesCollection.grades;
+
+  editableMaxRange: { from: number; to: number };
+  addableMaxRange: { from: number; to: number } = { from: 0, to: 100 };
 
   editable: any;
-  addable: { name: string; from: number; to: number; description: string } = {
+  addable: {
+    name: string;
+    from: number;
+    to: number;
+    description: string;
+    maxRange: {
+      from: number;
+      to: number;
+    };
+  } = {
     name: 'Your grade name',
     from: 0,
     to: 0,
     description: 'Your descripton here',
+    maxRange: {
+      from: 0,
+      to: 100,
+    },
   };
 
   ngOnInit(): void {
     this.editable = this.gradesCollection.getGradeEditable();
     this.grade = this.editable;
-    this.gradeId = this.grade.id;
   }
 
   updateGrade() {
-    this.gradesCollection.updateGrade(this.gradeId, {
+    this.gradesCollection.updateGrade(this.grade.id, {
       name: this.grade.name,
       from: this.grade.from,
       to: this.grade.to,
@@ -45,22 +61,54 @@ export class EditGradeComponent implements OnInit {
   }
 
   addGrade() {
-    // this.gradesCollection.addGrade({
-    //   name: this.grade.name,
-    //   to: this.grade.to,
-    //   from: this.grade.from,
-    //   description: this.grade.description,
-    // });
+    if (this.checkForOverlapingRanges(this.grade.from, this.grade.to)) {
+      console.log('I will add this one');
+      this.gradesCollection.addGrade({
+        name: this.grade.name,
+        to: this.grade.to,
+        from: this.grade.from,
+        description: this.grade.description,
+      });
 
-    this.checkForOverlapingRanges(11, 20);
+      this.grade = {
+        name: 'Your grade name',
+        from: 0,
+        to: 0,
+        description: 'Your descripton here',
+      };
+    } else {
+      console.log('You fool, choose ranges better');
+      //display how bad user is
+    }
   }
 
   checkForOverlapingRanges(from: number, to: number) {
-    let ranges = this.gradesCollection.grades.map((el) => [el.from, el.to]);
-    let results = ranges.map((el) => {
-      return (el[0] < from && from < el[1]) || (el[0] < to && to < el[1]);
-    });
+    let rangeIsFine = false;
+    let end = this.grades.length - 1;
 
-    console.log(results);
+    if (from > to) {
+      return rangeIsFine;
+    }
+
+    for (let ind = 0; ind <= end; ind++) {
+      if (from > this.grades[ind].to) {
+        if (ind === end) {
+          rangeIsFine = true;
+          break;
+        } else {
+          if (to < this.grades[ind + 1].from) {
+            rangeIsFine = true;
+            break;
+          }
+        }
+      } else {
+        if (ind === 0 && to < this.grades[ind].from) {
+          rangeIsFine = true;
+          break;
+        }
+      }
+    }
+
+    return rangeIsFine;
   }
 }

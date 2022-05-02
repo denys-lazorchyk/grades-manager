@@ -14,7 +14,8 @@ export class GradesComponent implements OnInit {
     to: number;
     description: string;
   }[] = [];
-  @Input() editableGrade: any;
+
+  editableGrade: any;
 
   constructor(private gradesService: GradesCollection) {}
 
@@ -25,5 +26,6 @@ export class GradesComponent implements OnInit {
 
   getNewEditableGrade(id: any) {
     this.editableGrade = this.gradesService.getGrade(id);
+    console.log(this.editableGrade);
   }
 }

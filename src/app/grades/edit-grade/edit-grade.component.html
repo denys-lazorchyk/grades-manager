@@ -1,6 +1,6 @@
 <input type="text" [(ngModel)]="grade.name">
-<input type="number" min="0" max="100" [(ngModel)]="grade.from">
-<input type="number" min="0" max="100" [(ngModel)]="grade.to">
+<input type="number" min="{{grade.maxRange.from}}" max="{{grade.maxRange.to}}" [(ngModel)]="grade.from">
+<input type="number" min="{{grade.maxRange.from}}" max="{{grade.maxRange.to}}" [(ngModel)]="grade.to">
 <input type="text" [(ngModel)]="grade.description">
 <button class="removeGrade" (click)="updateGrade()" *ngIf="!addOrRemove">Submit Changes</button>
 <button class="addGrade" (click)="addGrade()" *ngIf="addOrRemove">Add Grade</button>

@@ -1,20 +1,17 @@
-import { max } from 'rxjs';
-
 export class GradesCollection {
-  grades = [
+  grades: {
+    id: number;
+    name: string;
+    from: number;
+    to: number;
+    description: string;
+  }[] = [
     {
       id: 1,
       name: 'F',
-      from: 0,
-      to: 10,
+      from: 10,
+      to: 15,
       description: 'You messes ud, pal!',
-    },
-    {
-      id: 2,
-      name: 'E',
-      from: 31,
-      to: 49,
-      description: 'You could do better!',
     },
     {
       id: 3,
@@ -24,12 +21,26 @@ export class GradesCollection {
       description: 'You passed, be happy',
     },
     {
+      id: 2,
+      name: 'E',
+      from: 31,
+      to: 49,
+      description: 'You could do better!',
+    },
+    {
       id: 4,
       name: 'C',
       from: 73,
       to: 89,
       description: 'Fine!',
     },
+    // {
+    //   id: 6,
+    //   name: 'A',
+    //   from: 100,
+    //   to: 100,
+    //   description: 'Perfect!',
+    // },
     {
       id: 5,
       name: 'B',
@@ -37,16 +48,16 @@ export class GradesCollection {
       to: 99,
       description: 'Great job',
     },
-    {
-      id: 6,
-      name: 'A',
-      from: 100,
-      to: 100,
-      description: 'Perfect!',
-    },
   ];
 
-  editableGrade = this.grades[0];
+  editableGrade = {
+    ...this.grades[0],
+    maxRange: this.getRangesForGrade(this.grades[0].id),
+  };
+
+  constructor() {
+    this.sortGrades();
+  }
 
   removeGrade(id: number) {
     let index = this.grades.findIndex((el) => el.id === id);
@@ -66,6 +77,7 @@ export class GradesCollection {
       from: gradeInfo.from,
       description: gradeInfo.description,
     });
+    this.sortGrades();
   }
 
   getGrades() {
@@ -75,7 +87,7 @@ export class GradesCollection {
   getGrade(id: number) {
     if (id > 0 && this.grades.length) {
       const grade = this.grades.find((el) => el.id == id);
-      return grade;
+      return { ...grade, maxRange: this.getRangesForGrade(id) };
     } else if (this.grades.length === 0) {
       return {
         id: 0,
@@ -85,7 +97,10 @@ export class GradesCollection {
         description: 'You have no grades',
       };
     } else {
-      return this.grades[0];
+      return {
+        ...this.grades[0],
+        maxRange: this.getRangesForGrade(this.grades[0].id),
+      };
     }
   }
 
@@ -111,5 +126,25 @@ export class GradesCollection {
 
   getMaxId() {
     return Math.max(...this.grades.map((el) => el.id));
+  }
+
+  sortGrades() {
+    this.grades.sort((a, b) => a.to - b.to);
+  }
+
+  getRangesForGrade(id: number) {
+    let temp: { from: number; to: number } = { from: 0, to: 100 };
+    let grade: any = this.grades.find((el) => el.id === id);
+    let position = this.grades.indexOf(grade);
+    if (this.grades.length) {
+      temp = {
+        from: this.grades[position - 1] ? this.grades[position - 1].to + 1 : 0,
+        to: this.grades[position + 1]
+          ? this.grades[position + 1].from - 1
+          : 100,
+      };
+    }
+
+    return temp;
   }
 }
